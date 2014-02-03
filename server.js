@@ -63,11 +63,14 @@ inquirer.prompt([{
         }
 
         var conn = Pool.getConnection(data.team);
+
         if (!conn) {
           socket.emit('init_'+data.team, null);
         }
-        conn.setSocket(socket);
-        conn.initWebSocket();
+        else {
+          conn.setSocket(socket);
+          conn.initInfo();
+        }
       }
     });
   });
