@@ -2,7 +2,7 @@
   "port": 5000,
   "interval": 100,
   "vision": {
-    "width": 7,
+    "width": 9,
     "height": 6
   },
   "precision": 3,
