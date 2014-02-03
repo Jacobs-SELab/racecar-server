@@ -49,6 +49,10 @@ inquirer.prompt([{
     console.log('Server is listening on port '.green + port.toString().green);
   });
 
+  setTimeout(function(){
+
+  });
+
   io.sockets.on('connection', function (socket) {
     socket.listen('init', function (data) {
       if (data.team) {
@@ -69,7 +73,7 @@ inquirer.prompt([{
 });
 
 function handleHTTP (req, res) {
-  res.json({});
+  //res.json({});
   // serve your HTML :)
 }
 
