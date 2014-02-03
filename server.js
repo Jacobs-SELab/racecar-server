@@ -50,8 +50,14 @@ inquirer.prompt([{
   });
 
   io.sockets.on('connection', function (socket) {
-    socket.listen('init', function (data) {
+    socket.on('init', function (data) {
       if (data.team) {
+        
+        if (!Pool) {
+          socket.emit('init_'+data.team, null);
+          return;
+        }
+
         var conn = Pool.getConnection(data.team);
         if (!conn) {
           socket.emit('init_'+data.team, null);
