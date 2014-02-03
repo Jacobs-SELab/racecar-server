@@ -1,0 +1,17 @@
+{
+  "Outside": "#",
+  "Track": "_",
+  "Rock": "r",
+  "Wall": "w",
+  "Light": {
+    "Green": "+",
+    "Red": "-"
+  },
+  "Health": "h",
+  "Speed": "s",
+  "Vodka": "v",
+  "Prohibition": "p",
+  "Nails": "n",
+  "Car": "C",
+  "Finish": "="
+}

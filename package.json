@@ -6,7 +6,9 @@
     "colors": "~0.6.2",
     "underscore": "~1.5.2",
     "underscore.string": "~2.3.3",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "inquirer": "~0.4.0",
+    "socket.io": "~0.9.16"
   },
   "devDependencies": {},
   "engines": {

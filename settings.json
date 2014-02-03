@@ -1,4 +1,12 @@
 {
   "port": 5000,
-  "interval": 100
+  "interval": 100,
+  "vision": {
+    "width": 7,
+    "height": 6
+  },
+  "precision": 3,
+  "sendContinous": true,
+  "filtered": "[rw+\\-hsvpnC]",
+  "httpPort": 8080
 }

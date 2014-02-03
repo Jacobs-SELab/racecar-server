@@ -1,18 +1,76 @@
 var colors = require('colors');
 var net = require('net');
+var fs = require('fs');
+var path = require('path');
+var inquirer = require('inquirer');
+var app = require('http').createServer(handleHTTP);
+var io = require('socket.io').listen(app);
+var _ = require('underscore');
+_.str = require('underscore.string');
+
+_.mixin(_.str.exports());
+_.str.include('Underscore.string', 'string');
 
 var settings = require('./settings.json');
-var Connection = require('./lib/Connection');
+var Map = require('./lib/Map');
 
 var port = process.env.PORT || settings.port;
+var httpPort = process.env.HTTPPORT || settings.httpPort;
 
+var files = fs.readdirSync(path.join(__dirname, 'maps'));
 
-var server = net.createServer(function (socket) {
-  var conn = Connection.handle(socket);
+var maps = _.filter(files, function (f) {
+  return _(f).endsWith('.map');
 });
 
-server.on('listening', function (e) {
-  console.log('Server is listening on port '.green + port.toString().green);
+inquirer.prompt([{
+  type: 'list',
+  name: 'mapname',
+  message: 'Which map do you want to load?',
+  paginated: true,
+  choices: maps
+}], function (answers) {
+
+  var mapPath = path.join(__dirname, 'maps', answers.mapname);
+  
+  var map = Map.read(mapPath);
+
+  // console.log(map.getFullMapString());
+
+  var Connection = require('./lib/Connection')(map);
+
+  var Pool;
+
+  var server = net.createServer(function (socket) {
+    Pool = Connection(socket);
+  });
+
+  server.on('listening', function (e) {
+    console.log('Server is listening on port '.green + port.toString().green);
+  });
+
+  io.sockets.on('connection', function (socket) {
+    socket.listen('init', function (data) {
+      if (data.team) {
+        var conn = Pool.getConnection(data.team);
+        if (!conn) {
+          socket.emit('init_'+data.team, null);
+        }
+        conn.setSocket(socket);
+        conn.initWebSocket();
+      }
+    });
+  });
+
+  server.listen(port);
+  app.listen(httpPort, function (e) {
+    console.log('Connect Front-End to port '.green + httpPort.toString().green);
+  });
 });
 
-server.listen(port);
+function handleHTTP (req, res) {
+  res.json({});
+  // serve your HTML :)
+}
+
+
