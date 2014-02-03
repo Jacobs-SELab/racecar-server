@@ -1,6 +1,7 @@
 {
   "NotValidCommand": "Not A Valid Command",
   "WrongMapFormat": "The Map File Has An Invalid Format",
+  "WrongMapData": "The Map Data Is Invalid",
   "TeamNameTaken": "Team Name Is Taken",
   "InvalidAngle": "Invalid Angle Taken",
   "NoStart": "No Start specified in the map",
