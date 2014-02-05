@@ -1,0 +1,105 @@
+<!-- Author: Dmitrii Cucleschin  -->
+<!-- Email: dmitrii.cucleschin@gmail.com -->
+<!-- File: index.html -->
+<!--  -->
+<!-- This code is distributed under GPL v2 license. -->
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Racecar Viewer</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="inc/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="inc/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="inc/font-awesome.min.css">
+</head>
+<body>
+	<!-- Prepare scripts -->
+	<script src="inc/jquery-1.11.0.min.js"></script>
+	<script src="inc/jquery-ui.js"></script>
+	<script src="inc/bootstrap.min.js"></script>
+	<script src="inc/socket.io.min.js"></script>
+
+	<script src="js/Drawer.js"></script>
+	<script src="js/State.js"></script>
+	<script src="js/Listener.js"></script>
+	<script src="js/main.js"></script>
+
+	<div class="row" id="starter">
+			<div class="col-sm-3 col-md-3 col-lg-3" id="form_left"></div>
+			<div class="col-sm-6 col-md-6 col-lg-6" id="form">
+				<div class="well">
+					<h1 class="center">Racecar GUI Client</h1>
+					<br/><br/>
+					<h3>Ip:Port :</h3>
+					<form>
+						<input type="text" class="form-control" id="server" value="127.0.0.1:8080"></input>
+					</form>
+					<h3>Team name:</h3>
+					<form>
+						<input type="text" class="form-control" id="team" value="Default"></input>
+					</form>
+				</div>
+			</div>
+			<div class="col-sm-3 col-md-3 col-lg-3" id="form_right"></div>
+	</div>
+
+	<div id="viewer">
+		<canvas id="canvas">
+			Doesn't support canvas? :(
+		</canvas>
+	</div>
+
+	<div id="menu">
+		<div>
+			<div class="col-lg-4 col-md-4 col-sm-4">
+				<div class="stats_label_hp">
+					<p class="lead text-danger"><span class="fa fa-heart"></span></p>
+				</div>
+				<div class="stats_label_speed">
+					<p class="lead text-warning"><span class="fa-flash fa"></span></p>
+				</div>
+				<div class="stats_label_angle">
+					<p class="lead text-info"><span class="fa fa-undo"></span></p>
+				</div>
+				<div class="stats_label_time">
+					<p class="lead text-primary"><span class="fa fa-clock-o"></span></p>
+				</div>
+			</div>
+			<div class="col-lg-8 col-md-8 col-sm-8">
+				<div>
+					<p class="lead text-muted" id="stats_hp">100%</p>
+				</div>
+				<div>
+					<p class="lead text-muted" id="stats_speed">5m/s</p>
+				</div>
+				<div>
+					<p class="lead text-muted" id="stats_angle">50°</p>
+				</div>
+				<div>
+					<p class="lead text-muted" id="stats_time">05:00</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="col-sm-6 col-md-6 col-lg-6 center">
+				<p class="lead text-success"><span id="stats_drunk" class="fa fa-glass"></span></p>
+			</div>
+			<div class="col-sm-6 col-md-6 col-lg-6 center">
+				<p class="lead text-success" id="stats_broken"><span class="fa fa-warning"></span></p>
+			</div>
+		</div>
+		<div>
+			<div class="center">
+				<p class="lead text-muted"><span class="fa fa-lock" id="lock_button"></span></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="hidden">
+		<canvas id="cache_canvas"></canvas>
+	</div>
+	
+</body>
+</html>

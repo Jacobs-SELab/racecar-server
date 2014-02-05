@@ -8,7 +8,8 @@
     "underscore.string": "~2.3.3",
     "lodash": "~2.4.1",
     "inquirer": "~0.4.0",
-    "socket.io": "~0.9.16"
+    "socket.io": "~0.9.16",
+    "url": "*"
   },
   "devDependencies": {},
   "engines": {
