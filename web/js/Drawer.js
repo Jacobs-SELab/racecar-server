@@ -12,6 +12,10 @@ function Drawer () {
 
     this.cacheCanvas = null;
 
+    this.carCanvas = document.getElementById("car_canvas");
+    this.carCanvas.width = this.cellSize;
+    this.carCanvas.height = this.cellSize;
+
     this.tileset = new Image;
     this.tileset.src = "res/tileset.png";
 
@@ -126,27 +130,34 @@ Drawer.prototype.drawCache = function() {
 }
 
 Drawer.prototype.redraw = function() {
+    // Clear
     this.clear();
 
+    // Find car
     var carPosition = {x:0, y:0};
     carPosition.x = (state.x * this.cellSize);
     carPosition.y = (state.y * this.cellSize);
 
+    // Fix the transform matrix if locked
     if (this.locked) {
         c.setTransform(1,0,0,1,0,0);
         var center = c.transformedPoint(canvas.width/2, canvas.height/2);
         c.translate(center.x - carPosition.x, center.y - carPosition.y);
     }
 
-    if (!this.cacheCanvas) {
-        this.drawCache();
-    }
-    else {
-        c.drawImage(this.cacheCanvas,0,0);
-    }
+    // Draw map
+    if (!this.cacheCanvas) this.drawCache();
+    else c.drawImage(this.cacheCanvas,0,0);
 
-    // TODO: Add nice rotation
-    c.drawImage(this.car,carPosition.x,carPosition.y,this.cellSize, this.cellSize);
+    // Draw car
+    var cc = this.carCanvas.getContext("2d");
+    cc.save();
+    cc.translate(this.cellSize/2,this.cellSize/2);
+    cc.rotate(-state.angle * Math.PI/180);
+    cc.drawImage(this.car, -this.cellSize/2, -this.cellSize/2, this.cellSize, this.cellSize);
+    cc.restore();
+
+    c.drawImage(this.carCanvas,carPosition.x,carPosition.y,this.cellSize, this.cellSize);
 }
 
 Drawer.prototype.update = function() {
