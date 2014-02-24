@@ -83,7 +83,7 @@ inquirer.prompt([{
 });
 
 function handleHTTP (req, res) {
-    var uri = url.parse(req.url).pathname
+  var uri = url.parse(req.url).pathname
     , filename = path.join(process.cwd(), "web", uri);
   
   fs.exists(filename, function(exists) {
@@ -104,8 +104,17 @@ function handleHTTP (req, res) {
         return;
       }
 
-      // Dima: Works, MIME types would be nice, however.
-      res.writeHead(200);
+      var mimeTypes = {
+        "html": "text/html",
+        "jpeg": "image/jpeg",
+        "jpg": "image/jpeg",
+        "png": "image/png",
+        "js": "text/javascript",
+        "css": "text/css"
+      };
+
+      var mime = mimeTypes[filename.split('.').pop()];
+      res.writeHead(200, {"Content-Type" : mime});
       res.write(file, "binary");
       res.end();
 

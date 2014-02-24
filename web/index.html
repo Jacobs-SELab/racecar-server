@@ -32,13 +32,13 @@
 				<div class="well">
 					<h1 class="center">Racecar GUI Client</h1>
 					<br/><br/>
-					<h3>Ip:Port :</h3>
+					<h3>Server's IP :</h3>
 					<form>
-						<input type="text" class="form-control" id="server" value="127.0.0.1:8080"></input>
+						<input type="text" class="form-control" id="server" value="localhost"></input>
 					</form>
 					<h3>Team name:</h3>
 					<form>
-						<input type="text" class="form-control" id="team" value="Default"></input>
+						<input type="text" class="form-control" id="team" value="foo"></input>
 					</form>
 				</div>
 			</div>
@@ -49,6 +49,10 @@
 		<canvas id="canvas">
 			Doesn't support canvas? :(
 		</canvas>
+		<div class="hidden">
+			<canvas id="cache_canvas"></canvas>
+			<canvas id="car_canvas"></canvas>
+		</div>
 	</div>
 
 	<div id="menu">
@@ -95,11 +99,6 @@
 				<p class="lead text-muted"><span class="fa fa-lock" id="lock_button"></span></p>
 			</div>
 		</div>
-	</div>
-
-	<div class="hidden">
-		<canvas id="cache_canvas"></canvas>
-	</div>
-	
+	</div>	
 </body>
 </html>
