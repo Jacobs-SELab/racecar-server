@@ -7,6 +7,6 @@
   },
   "precision": 3,
   "sendContinous": true,
-  "filtered": "[rw+\\-hsvpnC]",
+  "filtered": "[rw+\\-hsvpn]",
   "httpPort": 8080
 }
